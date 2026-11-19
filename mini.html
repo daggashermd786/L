@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>NAWAZ-MD</title>
+  <title>𝐍𝐎𝐁𝐈𝐓𝐀-𝐌𝐃/title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -651,42 +651,6 @@ background:linear-gradient(135deg,#ff8c00,#0284C7);
     }
   
 
-
-
-/* Continuous single-line title ticker */
-.title.title-marquee{
-  display:block !important;
-  width:100% !important;
-  overflow:hidden !important;
-  white-space:nowrap !important;
-  text-align:left !important;
-  margin-left:0 !important;
-  margin-right:0 !important;
-}
-.title-marquee-track{
-  display:flex !important;
-  width:max-content !important;
-  align-items:center !important;
-  gap:52px !important;
-  white-space:nowrap !important;
-  will-change:transform;
-  animation:titleMarquee 13s linear infinite !important;
-}
-.title-marquee-track > span{
-  display:block !important;
-  flex:0 0 auto !important;
-  white-space:nowrap !important;
-}
-.title.title-marquee:hover .title-marquee-track{
-  animation-play-state:paused !important;
-}
-@keyframes titleMarquee{
-  from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
-}
-@media (prefers-reduced-motion:reduce){
-  .title-marquee-track{animation:none !important;}
-}
 
 </style>
 
@@ -1363,14 +1327,6 @@ body{background:var(--ui-bg) !important;}
   }
 </style>
 
-<style id="two-bot-switcher-style">
-.bot-switcher{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 20px}
-.bot-switch-btn{min-width:0;border:1px solid rgba(0,229,255,.35);border-radius:15px;padding:13px 10px;background:rgba(0,229,255,.08);color:#fff;font:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;transition:transform .2s ease,background .2s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent}
-.bot-switch-btn i{font-size:20px;color:#63f5ff}.bot-switch-btn span{font-size:13px;font-weight:800;letter-spacing:.5px}.bot-switch-btn small{font-size:10px;opacity:.75;letter-spacing:1px}
-.bot-switch-btn.active{background:linear-gradient(135deg,rgba(0,229,255,.28),rgba(0,151,167,.24));border-color:#63f5ff;box-shadow:0 0 18px rgba(0,229,255,.16)}
-.bot-switch-btn:active{transform:scale(.98)}.bot-empty-note{color:#fff;opacity:.85;font-size:13px;line-height:1.6;text-align:center;padding:14px;border:1px dashed rgba(255,255,255,.35);border-radius:12px;grid-column:1/-1}
-@media(max-width:380px){.bot-switch-btn span{font-size:11px}.bot-switch-btn{padding:11px 6px}}
-</style>
 </head>
 <body>
   <div class="bg-gradient"></div>
@@ -1403,19 +1359,8 @@ body{background:var(--ui-bg) !important;}
             <i class="fas fa-bolt"></i>
           </div>
         </div>
-        <h1 class="title title-marquee" aria-label="NOBITA MD / TIGER MD">
-          <span class="title-marquee-track">
-            <span>✦ NOBITA MD / TIGER MD ✦</span>
-            <span aria-hidden="true">✦ NOBITA MD / TIGER MD ✦</span>
-          </span>
-        </h1>
+        <h1 class="title">✦ 𝐍𝐎𝐁𝐈𝐓𝐀-𝐌𝐃 ✦</h1>
         <p class="subtitle">Premium Pairing Code Generator</p>
-      </div>
-
-      <!-- Bot Switcher -->
-      <div class="bot-switcher" id="botSwitcher" aria-label="Choose bot">
-        <button type="button" class="bot-switch-btn active" data-bot="nobita"><span>NOBITA MD</span></button>
-        <button type="button" class="bot-switch-btn" data-bot="tiger"><span>TIGER MD</span></button>
       </div>
 
       <!-- Server Info Section -->
@@ -1507,7 +1452,7 @@ body{background:var(--ui-bg) !important;}
 
       <div class="footer">
         <p class="footer-text">
-          NOBITA MD • TIGER MD ❤️
+          𝐍𝐎𝐁𝐈𝐓𝐀-𝐌𝐃 ❤️
         </p>
       </div>
     </div>
@@ -1547,7 +1492,6 @@ body{background:var(--ui-bg) !important;}
     let currentCode = null;
     let totalUsersRefreshTimer = null;
     let selectedServer = null;
-    let activeBot = 'nobita'; // nobita or tiger
     let selectedServerStatus = null;
     let cooldownTimer = null;
     let cooldownActive = false;
@@ -1555,11 +1499,11 @@ body{background:var(--ui-bg) !important;}
     // Fetch and calculate the live total of connected users across every server.
     async function getTotalConnectedUsers() {
       try {
-        const response = await axios.get('/api/servers', { params: botApiParams() });
+        const response = await axios.get('/api/servers');
         const servers = Array.isArray(response.data.servers) ? response.data.servers : [];
 
         const results = await Promise.allSettled(
-          servers.map(server => axios.get(`/api/status/${server.id}`, { params: botApiParams() }))
+          servers.map(server => axios.get(`/api/status/${server.id}`))
         );
 
         return results.reduce((total, result) => {
@@ -1578,13 +1522,13 @@ body{background:var(--ui-bg) !important;}
       leftOrb?.classList.add('checking');
 
       try {
-        const response = await axios.get('/api/servers', { params: botApiParams() });
+        const response = await axios.get('/api/servers');
         const servers = Array.isArray(response.data?.servers) ? response.data.servers : [];
 
         const results = await Promise.allSettled(
           servers.map(async server => {
             try {
-              const statusResponse = await axios.get(`/api/status/${server.id}`, { params: botApiParams() });
+              const statusResponse = await axios.get(`/api/status/${server.id}`);
               return { server, offline: !!statusResponse?.data?.error };
             } catch (error) {
               return { server, offline: true };
@@ -1632,43 +1576,11 @@ body{background:var(--ui-bg) !important;}
       }
     }
 
-    function botApiParams(extra = {}) { return { ...extra, bot: activeBot }; }
-
-    function updateBotSwitcherUI() {
-      document.querySelectorAll('.bot-switch-btn').forEach(button => {
-        const active = button.dataset.bot === activeBot;
-        button.classList.toggle('active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-    }
-
-    async function switchBot(bot) {
-      if (!['nobita', 'tiger'].includes(bot) || bot === activeBot) return;
-      activeBot = bot;
-      selectedServer = null;
-      selectedServerStatus = null;
-      currentServerName.textContent = bot === 'tiger' ? 'Tiger MD • Select Server' : 'Nobita MD • Select Server';
-      activeCount.innerHTML = '<i class="fas fa-circle" style="color:#fff;"></i> Active: --';
-      serverLimit.innerHTML = '<i class="fas fa-users"></i> Limit: --/50';
-      generateBtn.disabled = true;
-      generateBtn.style.display = 'flex';
-      loading.style.display = 'none';
-      resetCodeBox();
-      updateBotSwitcherUI();
-      serverSelection.style.display = 'block';
-      serverSelection.classList.add('show');
-      serverInfo.style.display = 'none';
-      await loadServers();
-      showToast(bot === 'tiger' ? 'Tiger MD selected' : 'Nobita MD selected');
-    }
-
     // Initialize the app
     async function initApp() {
       serverInfo.style.display = 'flex';
       serverSelection.style.display = 'none';
       
-      updateBotSwitcherUI();
-      document.querySelectorAll('.bot-switch-btn').forEach(button => button.addEventListener('click', () => switchBot(button.dataset.bot)));
       await loadServers();
       serverInfo.addEventListener('click', showServerSelection);
     }
@@ -1676,7 +1588,7 @@ body{background:var(--ui-bg) !important;}
     // Load servers from our backend API
     async function loadServers() {
       try {
-        const response = await axios.get('/api/servers', { params: botApiParams() });
+        const response = await axios.get('/api/servers');
         populateServerGrid(response.data.servers);
       } catch (error) {
         console.error('Error loading servers:', error);
@@ -1692,15 +1604,6 @@ body{background:var(--ui-bg) !important;}
     // Populate server grid
     function populateServerGrid(servers) {
       serverGrid.innerHTML = '';
-      if (!Array.isArray(servers) || servers.length === 0) {
-        const note = document.createElement('div');
-        note.className = 'bot-empty-note';
-        note.textContent = activeBot === 'tiger'
-          ? 'Tiger MD links are not added yet. Open mini.js and replace ADD_TIGER_MD_SERVER_1_LINK_HERE (and other placeholders you need) with your Tiger MD server URLs.'
-          : 'No server links are currently available.';
-        serverGrid.appendChild(note);
-        return;
-      }
       
       // Randomize server order so a different server can appear at the top.
       const shuffledServers = [...servers];
@@ -1739,7 +1642,7 @@ body{background:var(--ui-bg) !important;}
     // Update server status from our backend API
     async function updateServerStatus(serverId) {
       try {
-        const response = await axios.get(`/api/status/${serverId}`, { params: botApiParams() });
+        const response = await axios.get(`/api/status/${serverId}`);
         const data = response.data || {};
         const isOffline = !!data.error;
         selectedServerStatus = {
@@ -1767,8 +1670,8 @@ body{background:var(--ui-bg) !important;}
       const text = serverStatusToast.querySelector('span');
 
       text.textContent = isOnline
-        ? `${activeBot === 'tiger' ? 'Tiger MD' : 'Nobita MD'} • Server ${serverNum} Is Ready`
-        : `${activeBot === 'tiger' ? 'Tiger MD' : 'Nobita MD'} • Server ${serverNum} Is Offline`;
+        ? `Server ${serverNum} Is Ready`
+        : `Server ${serverNum} Is Offline`;
 
       icon.className = isOnline
         ? 'fas fa-check-circle'
@@ -1787,7 +1690,7 @@ body{background:var(--ui-bg) !important;}
     function updateSelectedServerUI(serverId, status) {
       const serverNum = serverId.replace('server', '');
       
-      currentServerName.textContent = `${activeBot === 'tiger' ? 'Tiger MD' : 'Nobita MD'} • Server ${serverNum}`;
+      currentServerName.textContent = `Server ${serverNum}`;
       
       if (status) {
         activeCount.innerHTML = `<i class="fas fa-circle" style="color:#00FF88;"></i> Active: ${status.count}`;
@@ -1950,8 +1853,7 @@ body{background:var(--ui-bg) !important;}
         const response = await axios.get('/api/code', {
           params: {
             server: selectedServer,
-            number: phoneNumber.replace(/[^\d]/g, ''),
-            bot: activeBot
+            number: phoneNumber.replace(/[^\d]/g, '')
           }
         });
         
@@ -2079,28 +1981,6 @@ body{background:var(--ui-bg) !important;}
   });
 })();
 </script>
-
-
-<style id="white-page-background-and-clean-bot-buttons">
-  html, body, body.theme-dark, body.theme-light,
-  .bg-gradient, body.theme-dark .bg-gradient, body.theme-light .bg-gradient {
-    background: #ffffff !important;
-    background-image: none !important;
-  }
-  .bg-gradient::after,
-  .glow-orb, .orb-1, .orb-2 {
-    display: none !important;
-    background: none !important;
-  }
-  .bot-switch-btn {
-    flex-direction: row !important;
-    gap: 0 !important;
-  }
-  .bot-switch-btn i,
-  .bot-switch-btn small {
-    display: none !important;
-  }
-</style>
 
 </body>
 </html>
